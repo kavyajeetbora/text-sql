@@ -1,0 +1,22 @@
+[project]
+name = "text-sql"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Kavyajeet Bora", email = "kavyajeetbora@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "boto3>=1.43.111",
+    "google-genai>=2.29.0",
+    "python-dotenv>=1.2.4",
+    "sqlglot>=30.22.0",
+]
+
+[project.scripts]
+text-sql = "text_sql:main"
+
+[build-system]
+requires = ["uv_build>=0.12.19,<0.13.0"]
+build-backend = "uv_build"
