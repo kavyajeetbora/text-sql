@@ -9,7 +9,9 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "boto3>=1.43.111",
+    "chromadb>=1.5.9",
     "google-genai>=2.29.0",
+    "ipykernel>=7.4.0",
     "python-dotenv>=1.2.4",
     "sqlglot>=30.22.0",
 ]

@@ -1,0 +1,40 @@
+DESCRIPTIONS = {
+    # existing tables
+    "customers": "People who buy from the shop: name, city and signup date.",
+    "products": "Items for sale with category and unit price.",
+    "orders": "Customer purchases: which customer bought which product, quantity, date and status (completed, cancelled, returned).",
+    # new tables
+    "suppliers": "Companies that supply products to the shop, with country and quality rating.",
+    "warehouses": "Storage locations where stock is kept.",
+    "inventory": "Current stock quantity of each product in each warehouse.",
+    "employees": "Shop staff with their role, department and hire date.",
+    "departments": "Company departments such as sales, support and logistics.",
+    "payments": "Payments made for orders: amount, payment method and payment status.",
+    "shipments": "Delivery of orders: courier, shipped date, delivered date and delivery status.",
+    "returns": "Products returned by customers with the return reason and refund amount.",
+    "product_reviews": "Customer ratings and written reviews for products.",
+    "promotions": "Discount campaigns with discount percentage and validity dates.",
+    "stores": "Physical retail store locations with city and manager.",
+    "invoices": "Billing documents issued for orders with tax and total amount.",
+    "categories": "Product category hierarchy and category managers.",
+    "loyalty_points": "Reward points earned and redeemed by customers.",
+    "support_tickets": "Customer support requests with issue type, priority and open or closed status.",
+}
+
+EXTRA_TABLES = {
+    "suppliers": "supplier_id INTEGER PRIMARY KEY, supplier_name TEXT, country TEXT, rating REAL",
+    "warehouses": "warehouse_id INTEGER PRIMARY KEY, warehouse_name TEXT, city TEXT, capacity INTEGER",
+    "inventory": "product_id INTEGER REFERENCES products(product_id), warehouse_id INTEGER REFERENCES warehouses(warehouse_id), stock_quantity INTEGER",
+    "employees": "employee_id INTEGER PRIMARY KEY, name TEXT, role TEXT, department_id INTEGER REFERENCES departments(department_id), hire_date TEXT",
+    "departments": "department_id INTEGER PRIMARY KEY, department_name TEXT, head_employee_id INTEGER",
+    "payments": "payment_id INTEGER PRIMARY KEY, order_id INTEGER REFERENCES orders(order_id), amount REAL, payment_method TEXT, payment_status TEXT",
+    "shipments": "shipment_id INTEGER PRIMARY KEY, order_id INTEGER REFERENCES orders(order_id), courier TEXT, shipped_date TEXT, delivered_date TEXT, delivery_status TEXT",
+    "returns": "return_id INTEGER PRIMARY KEY, order_id INTEGER REFERENCES orders(order_id), return_reason TEXT, refund_amount REAL, return_date TEXT",
+    "product_reviews": "review_id INTEGER PRIMARY KEY, product_id INTEGER REFERENCES products(product_id), customer_id INTEGER REFERENCES customers(customer_id), rating INTEGER, review_text TEXT",
+    "promotions": "promotion_id INTEGER PRIMARY KEY, promotion_name TEXT, discount_percent REAL, start_date TEXT, end_date TEXT",
+    "stores": "store_id INTEGER PRIMARY KEY, store_name TEXT, city TEXT, manager_name TEXT",
+    "invoices": "invoice_id INTEGER PRIMARY KEY, order_id INTEGER REFERENCES orders(order_id), tax_amount REAL, total_amount REAL, issued_date TEXT",
+    "categories": "category_id INTEGER PRIMARY KEY, category_name TEXT, parent_category TEXT, manager_name TEXT",
+    "loyalty_points": "customer_id INTEGER REFERENCES customers(customer_id), points_earned INTEGER, points_redeemed INTEGER, last_updated TEXT",
+    "support_tickets": "ticket_id INTEGER PRIMARY KEY, customer_id INTEGER REFERENCES customers(customer_id), issue_type TEXT, priority TEXT, status TEXT, created_date TEXT",
+}
